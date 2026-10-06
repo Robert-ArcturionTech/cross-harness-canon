@@ -1,0 +1,38 @@
+{
+  "schema": "cross-harness-canon.registry",
+  "schema_version": 1,
+  "_doc": "The one-line addition point for a new harness: add an entry here, run --apply, done. 'order' is the emission order. capabilities.mcp drives the single capability line: 'full' gets the MCP call plus the HTTP path, anything else gets HTTP only.",
+  "order": ["claude_code", "codex", "hermes", "gemini_cli", "antigravity"],
+  "harnesses": {
+    "claude_code": {
+      "display_name": "Claude Code",
+      "entry_filename": "CLAUDE.md",
+      "entry_point_phrase": "Claude Code entry point",
+      "capabilities": { "hooks": "full", "mcp": "full", "shell": "full" }
+    },
+    "codex": {
+      "display_name": "Codex",
+      "entry_filename": "AGENTS.md",
+      "entry_point_phrase": "Codex / generic agent platforms entry point",
+      "capabilities": { "hooks": "partial", "mcp": "full", "shell": "full" }
+    },
+    "hermes": {
+      "display_name": "Hermes",
+      "entry_filename": "HERMES.md",
+      "entry_point_phrase": "Hermes Agent entry point",
+      "capabilities": { "hooks": "partial", "mcp": "full", "shell": "full" }
+    },
+    "gemini_cli": {
+      "display_name": "Gemini CLI",
+      "entry_filename": "GEMINI.md",
+      "entry_point_phrase": "Gemini CLI entry point",
+      "capabilities": { "hooks": "partial", "mcp": "full", "shell": "full" }
+    },
+    "antigravity": {
+      "display_name": "Antigravity",
+      "entry_filename": "ANTIGRAVITY.md",
+      "entry_point_phrase": "Antigravity entry point",
+      "capabilities": { "hooks": "none", "mcp": "gap", "shell": "full" }
+    }
+  }
+}

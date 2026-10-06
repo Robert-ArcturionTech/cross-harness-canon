@@ -1,0 +1,55 @@
+{
+  "schema": "cross-harness-canon.agents",
+  "schema_version": 1,
+  "_doc": "Shared defaults plus per-agent variation. This file is the ONLY place a per-agent clause may live. It is rendered into all harness files for that agent, never hand-written into one of them.",
+
+  "measured": {
+    "rules": { "dir": "rules", "glob": "[0-9][0-9][0-9]_*.md" }
+  },
+
+  "defaults": {
+    "boot_pointer": "boot/home.md",
+    "lead_tail": "All identity, voice, rules and tools load from a single manifest.",
+    "boot_tail": "It lists every file to load at boot, in order, plus the on-demand tiers.",
+    "query_scope": "about the project, a past decision, or another agent's context",
+    "tail_line": "Everything else (memory, domain notes, catalogs) is **read on demand**, not at boot. The manifest explains the triggers.",
+    "capability_line": {
+      "template": "Before answering anything substantive ({scope}), query the knowledge service: {call}. Never bulk-scan the notes folder.",
+      "mcp": "`kb_query(topic=...)` (MCP)",
+      "http": "`GET http://localhost:8080/query?topic=...`",
+      "cli": "`kb-query \"...\"`"
+    },
+    "include": {
+      "file": "rules/operating-card.md",
+      "start": "<!-- review-contract:start -->",
+      "end": "<!-- review-contract:end -->"
+    },
+    "shared_tail": [
+      "> **Rules** - the {{measured.rules}} project rules live in `rules/`. They bind every harness equally.",
+      "**This file is machine-generated** by `{{generator}}` from `registry.json` + `agents.json`. All {{harness_count}} siblings ({{siblings}}) carry a byte-identical body apart from three registry-driven lines. **Do not hand-edit**: a hand edit is drift and `--check` fails on it. Put doctrine in the boot manifest."
+    ]
+  },
+
+  "agents": {
+    "example-agent": {},
+
+    "researcher": {
+      "subject": "the research agent",
+      "query_cli": true
+    },
+
+    "reviewer": {
+      "include_block": false,
+      "tail_line": "Everything else (review checklists, past findings) is **read on demand**, not at boot.",
+      "clauses": [
+        "Review notes are private to this agent by default. Never surface them to other agents without the owner's direction."
+      ]
+    },
+
+    "shared-notes": {
+      "_note": "A real manifest, not a pointer: it keeps its own body verbatim and holds all siblings byte-identical with ZERO varying lines.",
+      "template": "verbatim",
+      "body_file": "bodies/shared-notes.md"
+    }
+  }
+}
